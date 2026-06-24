@@ -1,0 +1,16 @@
+# AI & Agent Framework
+langchain
+langchain-core
+langgraph
+langchain-openai    
+
+# Data Processing & Scraping
+requests
+beautifulsoup4
+pandas
+matplotlib
+seaborn
+
+# UI
+streamlit
+python-dotenv
