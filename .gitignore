@@ -1,1 +1,77 @@
 emavenv
+data/
+logs/
+test/
+.env/
+app_dashboard.py
+app2.py
+ChatGPT Image 00_58_55 25 thg 6, 2026.png
+
+# Tạo file .gitignore
+cat > .gitignore << EOF
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+emaven/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Data
+data/
+logs/
+*.log
+*.csv
+*.xlsx
+
+# Streamlit
+.streamlit/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Docker
+*.tar
+*.pid
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Reports
+*.pdf
+*.docx
+
+# Chrome Driver
+chromedriver.exe
+chromedriver
+EOF
