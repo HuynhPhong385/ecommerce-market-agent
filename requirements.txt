@@ -24,3 +24,13 @@ matplotlib==3.8.2
 tqdm==4.66.1
 pydantic==2.5.3
 EOF
+
+
+fastapi
+uvicorn
+sqlalchemy
+pymysql
+requests
+langchain
+langgraph
+pydantic

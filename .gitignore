@@ -6,7 +6,7 @@ test/
 app_dashboard.py
 app2.py
 ChatGPT Image 00_58_55 25 thg 6, 2026.png
-
+node-v24.18.0-x64.msi
 # Tạo file .gitignore
 cat > .gitignore << EOF
 # Python
@@ -75,3 +75,7 @@ htmlcov/
 chromedriver.exe
 chromedriver
 EOF
+# Node.js
+node_modules/
+dist/
+.env
