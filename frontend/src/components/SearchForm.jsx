@@ -7,9 +7,8 @@ export default function SearchForm({ onSearch, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!keyword.trim()) return;
-    // Gọi hàm kích hoạt tìm kiếm từ App.jsx truyền xuống
-    onSearch(keyword);
+    console.log("Đang nhấn nút Phân Tích với keyword:", keyword);
+    onSearch(keyword); // Truyền giá trị này lên App.jsx
   };
 
   return (
@@ -20,7 +19,7 @@ export default function SearchForm({ onSearch, isLoading }) {
           type="text"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Nhập sản phẩm cần phân tích đối thủ (Ví dụ: bàn phím cơ, tai nghe...)"
+          placeholder="Nhập sản phẩm cần phân tích"
           disabled={isLoading}
           className="w-full px-5 py-4 pl-12 text-gray-900 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100"
         />

@@ -15,7 +15,6 @@ export default function PriceChart({ priceTrends }) {
     { name: 'Cao Nhất', price: priceTrends.highest_price, color: '#EF4444' }, // Đỏ
   ];
 
-  // Hàm helper định dạng số tiền sang VND cho dễ đọc (Ví dụ: 150000 -> 150.000 đ)
   const formatVND = (value) => new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
 
   return (

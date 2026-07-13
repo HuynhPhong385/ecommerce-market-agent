@@ -1,8 +1,8 @@
-// src/components/ReportSection.jsx
+// src/components/ReportPages.jsx
 import React from 'react';
 import { Sparkles, Copy, Check } from 'lucide-react';
 
-export default function ReportSection({ aiContent }) {
+export default function ReportPage({ aiContent }) {
   const [copied, setCopied] = React.useState(false);
 
   if (!aiContent || !aiContent.title) {

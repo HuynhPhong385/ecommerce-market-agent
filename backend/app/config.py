@@ -1,7 +1,4 @@
-"AIzaSyDl3LI7S0phFe74J9umakY9qL8HHoJM2zk"
-
 # src/core/config.py
-
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -19,7 +16,7 @@ class Config:
     @classmethod
     def validate_api_key(cls) -> bool:
         """Kiểm tra xem API Key của Gemini có hợp lệ hay không"""
-        return bool(cls.GOOGLE_API_KEY) and cls.GOOGLE_API_KEY != "AIzaSyDl3LI7S0phFe74J9umakY9qL8HHoJM2zk"
+        return bool(cls.GOOGLE_API_KEY) and cls.GOOGLE_API_KEY != 'GOOGLE_API_KEY'
     
     @classmethod
     def get_api_key_preview(cls) -> str:
@@ -33,7 +30,7 @@ class Config:
     # Ưu tiên lấy từ biến môi trường, mặc định kết nối tới localhost
     DATABASE_URL = os.getenv(
         "DATABASE_URL", 
-        "mysql+pymysql://root:root@localhost:3306/tiki_market_agent"
+        "mysql+pymysql://root:root@localhost:3306/tiki_market_agent?charset=utf8mb4"
     )
     
     # --- CRAWLER SETTINGS ---

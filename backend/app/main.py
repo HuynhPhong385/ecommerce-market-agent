@@ -2,7 +2,8 @@
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.routers import agent  # Import router vừa tạo ở trên
+from backend.app.routers import agent
+from backend.app.routers import dashboard
 
 # Khởi tạo ứng dụng FastAPI chính
 app = FastAPI(
@@ -16,15 +17,17 @@ app = FastAPI(
 # mới có quyền gọi API xuống FastAPI Backend (chạy ở port 8000) mà không bị trình duyệt chặn.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],      # Cho phép tất cả các nguồn truy cập (Trong môi trường dev)
+    allow_origins=["http://localhost:5173"], # Chỉ cho phép frontend này gọi
     allow_credentials=True,
-    allow_methods=["*"],      # Cho phép tất cả các phương thức HTTP (GET, POST, PUT, DELETE)
-    allow_headers=["*"],      # Cho phép truyền mọi cấu trúc Headers
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Đăng ký (nhúng) router của Agent vào ứng dụng chính
-# Giờ đây bạn có thể truy cập API tại đường dẫn: http://localhost:8000/api/v1/agent/run-analysis
-app.include_router(agent.router)
+# http://localhost:8000/api/v1/agent/run-analysis
+# Ví dụ trong main.py
+app.include_router(agent.router, prefix="/api/v1/agent")
+app.include_router(dashboard.router, prefix="/api/v1/dashboard")
 
 # Endpoint kiểm tra trạng thái hoạt động cơ bản của Server (Health Check)
 @app.get("/")

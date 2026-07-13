@@ -11,7 +11,7 @@ def generate_report_node(state: AgentState) -> dict:
     # Đoạn này bạn tích hợp code gọi LLM (Gemini/OpenAI) của bạn vào
     suggested_title = f"[Giá Tốt Nhất] {keyword.upper()} Cao Cấp - Tối Ưu Phân Khúc Thị Trường"
     suggested_desc = (
-        f"### ✅ ĐẶC ĐIỂM SẢN PHẨM\n"
+        f"### ĐẶC ĐIỂM SẢN PHẨM\n"
         f"- Sản phẩm định vị chiến lược tại mức giá {price_info['suggested_price']}đ\n"
         f"- Phân tích giá trung bình trên sàn Tiki hiện tại: {price_info['average_price']}đ"
     )

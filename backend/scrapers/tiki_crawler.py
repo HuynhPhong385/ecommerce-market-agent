@@ -1,12 +1,14 @@
 # src/crawler/tiki_crawler.py
-
+import random
 import time
 import logging
 import requests
+
 from typing import List, Dict, Optional
 from datetime import datetime
 from urllib.parse import urlencode
-
+from backend.app.database import SessionLocal
+from backend.app.models import DailySummary
 logger = logging.getLogger(__name__)
 
 class TikiCrawler:
@@ -32,6 +34,32 @@ class TikiCrawler:
         
         logger.info("Khởi tạo Tiki Crawler thành công.")
     
+    def run(self, keyword):
+        print(f"Bắt đầu cào dữ liệu cho: {keyword}...")
+        
+        # --- Logic cào thực tế của bạn ở đây ---
+        # Ví dụ giả lập dữ liệu cào được:
+        scraped_revenue = 50000000 
+        scraped_sold = 100
+        
+        # Lưu vào Database
+        self._save_to_db(keyword, scraped_revenue, scraped_sold)
+        return True
+    def _save_to_db(self, category, revenue, sold):
+        db = SessionLocal()
+        try:
+            new_record = DailySummary(
+                report_date=datetime.now().date(),
+                category=category,
+                total_revenue=revenue,
+                total_products_sold=sold
+            )
+            db.add(new_record)
+            db.commit()
+        except Exception as e:
+            print(f"Lỗi database: {e}")
+        finally:
+            db.close()    
     def scrape(self, category: str, keywords: List[str], max_products: int = 20) -> List[Dict]:
         """
         Hàm chính kích hoạt tiến trình cào dữ liệu.
@@ -71,7 +99,7 @@ class TikiCrawler:
                         if products:
                             all_products.extend(products)
                 
-                time.sleep(1)  # Giãn cách 1 giây giữa các request để phòng chống Anti-bot cơ bản
+                time.sleep(random.uniform(2.5, 5.0))  # Giãn cách 1 giây giữa các request để phòng chống Anti-bot cơ bản
             
             # 3. Tiến hành chuẩn hóa cấu trúc dữ liệu và loại bỏ các ID trùng lặp
             standardized_list = []
@@ -101,6 +129,7 @@ class TikiCrawler:
                 'sort': 'top_seller',
             }
             response = self._make_request('/products', params)
+            
             if response and 'data' in response:
                 return response['data']
             return []
@@ -254,3 +283,12 @@ class TikiCrawler:
                 'short_description': product.get('short_description', ''),
             }
         }
+if __name__ == "__main__":
+    # Khởi tạo crawler
+    crawler = TikiCrawler()
+    
+    # Gọi hàm scrape với các tham số mẫu
+    # Bạn có thể thay đổi category và keywords tùy ý
+    results = crawler.scrape(category="Điện tử", keywords=["tai nghe", "chuột"])
+    
+    print(f"Đã cào xong! Tìm thấy {len(results)} sản phẩm.")

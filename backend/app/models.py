@@ -24,15 +24,16 @@ class TikiProduct(Base):
     history = relationship("PriceHistory", back_populates="product")
 
 class PriceHistory(Base):
-    __tablename__ = 'price_history'
+    __tablename__ = "price_history"
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey('tiki_products.id'), index=True) # Index giúp vẽ biểu đồ cực nhanh
     price = Column(Float, nullable=False)
     recorded_at = Column(DateTime, default=datetime.utcnow) # Nên dùng DateTime thay vì Date để theo dõi biến động giá trong ngày
-    product = relationship("Product", back_populates="history")
+    product = relationship("TikiProduct", back_populates="history")
 class DailySummary(Base):
     __tablename__ = 'daily_summary'
     id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('tiki_products.id'))
     report_date = Column(Date, index=True) # Index theo ngày để truy vấn theo khoảng thời gian (7 ngày, 30 ngày)
     category = Column(String(100), index=True) 
     total_revenue = Column(Float, default=0.0)
